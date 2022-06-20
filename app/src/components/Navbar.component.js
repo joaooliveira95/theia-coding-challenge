@@ -5,7 +5,7 @@ export default function Navbar() {
         <div class="navbar-brand">
           <a class="navbar-item">
             <img
-              src="https://bulma.io/images/bulma-type-white.png"
+              src="https://www.theia.finance/static/media/logo.70226144649d1a7c571327223765b4d1.svg"
               alt="Logo"
             />
           </a>
@@ -21,7 +21,7 @@ export default function Navbar() {
             <a class="navbar-item">Examples</a>
             <a class="navbar-item">Documentation</a>
             <span class="navbar-item">
-              <a class="button is-primary is-inverted">
+              <a class="button is-primary">
                 Connect
               </a>
             </span>
