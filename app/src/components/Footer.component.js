@@ -1,9 +1,9 @@
 export default function Footer() {
   return (
-    <nav class="tabs">
-      <div class="container">
+    <nav className="tabs">
+      <div className="container">
         <ul>
-          <li class="is-active">
+          <li className="is-active">
             <a>Overview</a>
           </li>
           <li>

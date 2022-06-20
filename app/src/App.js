@@ -6,16 +6,16 @@ import Navbar from "./components/Navbar.component";
 function App() {
   return (
     <div className="App">
-      <section class="hero is-dark is-fullheight">
-        <div class="hero-head">
+      <section className="hero is-dark is-fullheight">
+        <div className="hero-head">
           <Navbar />
         </div>
 
-        <div class="hero-body">
+        <div className="hero-body">
           <Content />
         </div>
 
-        <div class="hero-foot">
+        <div className="hero-foot">
           <Footer />
         </div>
       </section>
