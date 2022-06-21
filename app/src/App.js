@@ -1,25 +1,31 @@
 import "./App.css";
+import 'react-toastify/dist/ReactToastify.css'
 import Content from "./components/Content.component";
 import Footer from "./components/Footer.component";
 import Navbar from "./components/Navbar.component";
+import { WalletContextProvider } from "./context/Wallet.context";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <div className="App">
-      <section className="hero is-dark is-fullheight">
-        <div className="hero-head">
-          <Navbar />
-        </div>
+    <WalletContextProvider>
+      <div className="App">
+        <ToastContainer />
+        <section className="hero is-dark is-fullheight">
+          <div className="hero-head">
+            <Navbar />
+          </div>
 
-        <div className="hero-body">
-          <Content />
-        </div>
+          <div className="hero-body">
+            <Content />
+          </div>
 
-        <div className="hero-foot">
-          <Footer />
-        </div>
-      </section>
-    </div>
+          <div className="hero-foot">
+            <Footer />
+          </div>
+        </section>
+      </div>
+    </WalletContextProvider>
   );
 }
 

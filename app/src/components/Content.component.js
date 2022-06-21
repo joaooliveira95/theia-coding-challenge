@@ -9,10 +9,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Chart from "./Chart.component";
 import InvestorsChart from "./InvestorsChart.component";
+import Connect from "./Connect.component";
 
 export default function Content() {
   return (
     <div className="container is-max-widescreen has-text-centered">
+      <Connect />
       <p className="title is-size-4 has-text-left">Live Data</p>
       <div className="card">
         <Chart />

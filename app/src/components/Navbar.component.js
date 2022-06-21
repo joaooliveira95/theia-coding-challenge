@@ -1,4 +1,10 @@
+import { toast } from "react-toastify";
+import { useWallet } from "../context/Wallet.context";
+import { shortenWalletAddress } from "../utils/strings.utils";
+
 export default function Navbar() {
+  const { account, connectHandler } = useWallet();
+
   return (
     <nav className="navbar">
       <div className="container">
@@ -21,9 +27,21 @@ export default function Navbar() {
             <a className="navbar-item">Examples</a>
             <a className="navbar-item">Documentation</a>
             <span className="navbar-item">
-              <a className="button is-primary">
-                Connect
-              </a>
+              {!account ? (
+                <button className="button is-primary" onClick={connectHandler}>
+                  Connect
+                </button>
+              ) : (
+                <button
+                  className="button is-info"
+                  onClick={() => {
+                    navigator.clipboard.writeText(account)
+                    toast.success("Copied to clipboard")
+                  }}
+                >
+                  {shortenWalletAddress(account)}
+                </button>
+              )}
             </span>
           </div>
         </div>
