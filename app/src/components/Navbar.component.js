@@ -3,7 +3,7 @@ import { useWallet } from "../context/Wallet.context";
 import { shortenWalletAddress } from "../utils/strings.utils";
 
 export default function Navbar() {
-  const { account, connectHandler } = useWallet();
+  const { account, connectHandler, disconnectHandler } = useWallet();
 
   return (
     <nav className="navbar">
@@ -23,9 +23,6 @@ export default function Navbar() {
         </div>
         <div id="navbarMenuHeroA" className="navbar-menu">
           <div className="navbar-end">
-            <a className="navbar-item is-active">Home</a>
-            <a className="navbar-item">Examples</a>
-            <a className="navbar-item">Documentation</a>
             <span className="navbar-item">
               {!account ? (
                 <button className="button is-primary" onClick={connectHandler}>
@@ -35,14 +32,24 @@ export default function Navbar() {
                 <button
                   className="button is-info"
                   onClick={() => {
-                    navigator.clipboard.writeText(account)
-                    toast.success("Copied to clipboard")
+                    navigator.clipboard.writeText(account);
+                    toast.success("Copied to clipboard");
                   }}
                 >
                   {shortenWalletAddress(account)}
                 </button>
               )}
             </span>
+            {!!account && (
+              <span className="navbar-item">
+                <button
+                  className="button is-danger"
+                  onClick={disconnectHandler}
+                >
+                  Disconnect
+                </button>
+              </span>
+            )}
           </div>
         </div>
       </div>

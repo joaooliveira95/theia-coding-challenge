@@ -1,5 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { ethers } from "ethers";
+import { toast } from "react-toastify";
 
 const walletContext = createContext({});
 
@@ -8,14 +9,13 @@ export const useWallet = () => useContext(walletContext);
 const useWalletProvider = () => {
   const [account, setAccount] = useState(null);
   const [balance, setBalance] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
   useEffect(() => {
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", accountsChanged);
       window.ethereum.on("chainChanged", chainChanged);
-      accountsChanged();
-      chainChanged();
       if (!account) connectHandler();
     }
   }, []);
@@ -23,14 +23,18 @@ const useWalletProvider = () => {
   const accountsChanged = async (newAccount) => {
     setAccount(newAccount);
     try {
+      setLoading(true);
       const balance = await window.ethereum.request({
         method: "eth_getBalance",
-        params: [newAccount.toString(), "latest"],
+        params: [newAccount?.toString(), "latest"],
       });
       setBalance(ethers.utils.formatEther(balance));
     } catch (err) {
-      console.error(err);
+      console.log(err);
+      toast.error("There was a problem connecting to MetaMask");
       setErrorMessage("There was a problem connecting to MetaMask");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,21 +46,40 @@ const useWalletProvider = () => {
 
   const connectHandler = async () => {
     if (window.ethereum) {
+      setLoading(true);
       try {
         const res = await window.ethereum.request({
           method: "eth_requestAccounts",
         });
         await accountsChanged(res[0]);
       } catch (err) {
-        console.error(err);
+        toast.error("There was a problem connecting to MetaMask");
         setErrorMessage("There was a problem connecting to MetaMask");
+      } finally {
+        setLoading(false);
       }
     } else {
+      toast.error("Install MetaMask");
       setErrorMessage("Install MetaMask");
     }
   };
 
-  return { account, balance, connectHandler, errorMessage };
+  const disconnectHandler = async () => {
+    await window.ethereum.request({
+      method: "eth_requestAccounts",
+      params: [{ eth_accounts: {} }],
+    });
+    chainChanged();
+  };
+
+  return {
+    account,
+    balance,
+    loading,
+    connectHandler,
+    disconnectHandler,
+    errorMessage,
+  };
 };
 
 export const WalletContextProvider = ({ children }) => {
