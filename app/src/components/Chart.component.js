@@ -15,24 +15,44 @@ export default function Chart() {
 
   const options = {
     chart: {
+      backgroundColor: "#121729",
       zoomType: "x",
     },
     title: {
       text: "FAIR Offering Data",
+      style: {
+        color: "#FFF",
+      },
     },
     subtitle: {
       text:
         document.ontouchstart === undefined
           ? "Click and drag in the plot area to zoom in"
           : "Pinch the chart to zoom in",
+      style: {
+        color: "#FFF",
+      },
     },
     xAxis: {
       type: "datetime",
+      labels: {
+        style: {
+          color: "#FFF",
+        },
+      }
     },
     yAxis: {
       title: {
         text: "Last transaction price",
+        style: {
+          color: "#FFF",
+        },
       },
+      labels: {
+        style: {
+          color: "#FFF",
+        },
+      }
     },
     legend: {
       enabled: false,
@@ -79,7 +99,7 @@ export default function Chart() {
   };
 
   return (
-    <div style={{padding: '0.25rem'}}>
+    <div style={{ padding: "0.25rem" }}>
       <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );

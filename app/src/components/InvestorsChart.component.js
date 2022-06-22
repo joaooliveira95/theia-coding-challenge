@@ -4,12 +4,12 @@ import HighchartsReact from "highcharts-react-official";
 export default function InvestorsChart() {
   const options = {
     chart: {
+      backgroundColor: "#121729",
       plotBackgroundColor: null,
       plotBorderWidth: null,
       plotShadow: false,
       type: "pie",
-      height: 200,
-      width: 220,
+      height: 280,
     },
     title: {
       text: "",
@@ -29,6 +29,9 @@ export default function InvestorsChart() {
         dataLabels: {
           enabled: true,
           format: "<b>{point.name}</b>: {point.percentage:.1f} %",
+          style: {
+            color: "#fff",
+          },
         },
       },
     },
