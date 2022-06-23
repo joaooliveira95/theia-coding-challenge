@@ -1,9 +1,14 @@
+import classNames from "classnames";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useWallet } from "../context/Wallet.context";
 import { shortenWalletAddress } from "../utils/strings.utils";
 
 export default function Navbar() {
-  const { account, connectHandler, disconnectHandler } = useWallet();
+  const [isOpen, setIsOpen] = useState(false);
+  const { account, balance, connectHandler, disconnectHandler } = useWallet();
+
+  const displayBalance = `${balance} ${balance ? "ETH" : null}`;
 
   return (
     <nav className="navbar">
@@ -15,14 +20,24 @@ export default function Navbar() {
               alt="Logo"
             />
           </a>
-          <span className="navbar-burger" data-target="navbarMenuHeroA">
+          <span
+            className="navbar-burger"
+            data-target="navbarMenuHeroA"
+            onClick={() => setIsOpen(!isOpen)}
+          >
             <span></span>
             <span></span>
             <span></span>
           </span>
         </div>
-        <div id="navbarMenuHeroA" className="navbar-menu">
+        <div
+          id="navbarMenuHeroA"
+          className={classNames({ "navbar-menu": true, "is-active": isOpen })}
+        >
           <div className="navbar-end">
+            {balance && (
+              <span className="navbar-item">Balance: {displayBalance}</span>
+            )}
             <span className="navbar-item">
               {!account ? (
                 <button className="button is-primary" onClick={connectHandler}>

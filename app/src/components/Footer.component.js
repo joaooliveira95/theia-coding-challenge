@@ -3,23 +3,28 @@ export default function Footer() {
     <nav className="tabs">
       <div className="container">
         <ul>
-          <li className="is-active">
-            <a>Overview</a>
+          <li>
+            <a href="https://github.com/joaooliveira95" target="_blank">
+              Github
+            </a>
           </li>
           <li>
-            <a>Modifiers</a>
+            <a
+              href="https://github.com/joaooliveira95/theia-coding-challenge"
+              target="_blank"
+            >
+              Repo
+            </a>
           </li>
           <li>
-            <a>Grid</a>
+            <a href="https://bulma.io/" target="_blank">
+              CSS Framework
+            </a>
           </li>
           <li>
-            <a>Elements</a>
-          </li>
-          <li>
-            <a>Components</a>
-          </li>
-          <li>
-            <a>Layout</a>
+            <a href="https://www.highcharts.com/" target="_blank">
+              Charts Library
+            </a>
           </li>
         </ul>
       </div>
